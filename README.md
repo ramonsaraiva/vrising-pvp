@@ -9,12 +9,9 @@
 
 - `.tp` - teleports you to the arena location
 - `.hp` - refills your hp bar
-- `.blood` - sets your blood to frailed 100%
-  - `.scholar` - sets your blood to scholar 100%
-  - `.warrior` - sets your blood to warrior 100%
-  - `.worker` - sets your blood to worker 100%
-  - `.creature` - sets your blood to creature 100%
-  - `.brute` - sets your blood to brute 100%
+- `.blood <type> <quality>` - sets your blood to type <type> and quality <quality>
+  - allowed types are `scholar`, `warrior`, `worker`, `creature`, `brute`
+  - quality ranges from 1 to 100
 - `.weapons` - adds a kit of t8 weapons
 
 ### Respawn in same position
