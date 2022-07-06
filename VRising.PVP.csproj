@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>VRising.TestPlugin2</AssemblyName>
-		<Description>My first plugin</Description>
+		<AssemblyName>VRising.PVP</AssemblyName>
+		<Description>PVP Plugin</Description>
 		<Version>1.0.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
-	<ItemGroup>
-	  <None Remove="deploy.bat" />
-	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="BepInEx.IL2CPP" Version="6.0.0-*" IncludeAssets="compile" />
 		<PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
