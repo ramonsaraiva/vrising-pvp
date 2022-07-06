@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace VRising.PVP.Domain
@@ -14,9 +15,27 @@ namespace VRising.PVP.Domain
             Scholar = -700632469,
             Worker = -1342764880
         }
+
+        public static BloodType GetBloodTypeByName(string name)
+        {
+            var bloodTypeMap = new Dictionary<string, BloodType>()
+            {
+                {"frailed", BloodType.Frailed},
+                {"creature", BloodType.Creature},
+                {"warrior", BloodType.Warrior},
+                {"rogue", BloodType.Rogue},
+                {"brute", BloodType.Brute},
+                {"scholar", BloodType.Scholar},
+                {"worker", BloodType.Worker},
+            };
+            if (bloodTypeMap.TryGetValue(name, out BloodType bloodType))
+                return bloodType;
+            else
+                return BloodType.Frailed;
+        }
     }
 
-    struct FakeNull
+    struct NullableInt
     {
         public int value;
         public bool has_value;
