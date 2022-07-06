@@ -28,6 +28,7 @@ namespace VRising.PVP.Commands
                 { "weapons", () => Commands.Items.T8GearCommand(ev) },
                 { "hp", () => Commands.Buffs.HpCommand(ev) },
                 { "blood", () => Commands.Buffs.BloodCommand(ev, args) },
+                { "cd", () => Commands.Buffs.ResetCooldownCommand(ev) },
             };
             if (commandMap.TryGetValue(command, out var action))
                 action();

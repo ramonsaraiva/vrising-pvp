@@ -1,4 +1,5 @@
 ﻿using ProjectM;
+using Unity.Entities;
 using Wetstone.API;
 using Wetstone.Hooks;
 
@@ -27,6 +28,12 @@ namespace VRising.PVP.Commands
             Domain.Blood.BloodType bloodType = Domain.Blood.GetBloodTypeByName(args[0]);
             Services.Buffs.SetCharacterBlood(ev.User, bloodType, float.Parse(args[1]), 100);
             ev.User.SendSystemMessage($"Blood set to {args[0]} {args[1]}%");
+        }
+
+        public static void ResetCooldownCommand(VChatEvent ev)
+        {
+            Services.Buffs.ResetCooldowns(ev.SenderCharacterEntity);
+            ev.User.SendSystemMessage("Your cooldowns were resetted.");
         }
     }
 }
