@@ -1,7 +1,7 @@
 # VRising PVP plugin
 
 * Based on [BepInEx](https://github.com/BepInEx/BepInEx)
-* Uses [Wetstone](https://github.com/molenzwiebel/Wetstone) for things like hot reloading and hooks (chat commands delagete).
+* Uses [Wetstone](https://github.com/molenzwiebel/Wetstone) for things like hot reloading and hooks (chat commands delegate).
 
 ## Current functionalities
 
@@ -15,7 +15,7 @@
   - `.worker` - sets your blood to worker 100%
   - `.creature` - sets your blood to creature 100%
   - `.brute` - sets your blood to brute 100%
-- `.weapons` - adds a kit t8 weapons
+- `.weapons` - adds a kit of t8 weapons
 
 ### Respawn in same position
 
