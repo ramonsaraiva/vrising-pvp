@@ -56,7 +56,6 @@ namespace VRising.PVP
         {
             if (__instance._DeathEventQuery == null)
             {
-                Log.LogWarning("No death event query?");
                 return;
             }
 
@@ -65,7 +64,6 @@ namespace VRising.PVP
             {
                 if (!__instance.EntityManager.HasComponent<PlayerCharacter>(ev.Died))
                 {
-                    Log.LogWarning("Entity died but not player?");
                     continue;
                 }
 
@@ -75,12 +73,21 @@ namespace VRising.PVP
 
                 if (!user.IsConnected)
                 {
-                    Log.LogWarning("Player died but not online?");
                     continue;
                 }
 
-                Log.LogInfo("Respawn triggered.");
                 Respawn(ev.Died, player, userEntity);
+
+                /*
+                 * TODO: meh - sounds like the character gets spawned after we call this debug event, so the blood doesn't get updated
+                 * I guess i'd need to patch whatever system handles the respawn :-(
+                 */
+                var character = user.LocalCharacter._Entity;
+                var bloodComponent = __instance.EntityManager.GetComponentData<Blood>(character);
+                Domain.Blood.BloodType bloodType = (Domain.Blood.BloodType)bloodComponent.BloodType.GuidHash;
+                Domain.Blood.DebugBloodType debugBloodType = Domain.Blood.GetDebugBloodTypeByBloodType(bloodType);
+                Log.LogInfo($"Setting character's blood to {debugBloodType} {bloodComponent.Quality} 100");
+                Services.Buffs.SetCharacterBlood(user, debugBloodType, bloodComponent.Quality, 100);
             }
         }
     }
