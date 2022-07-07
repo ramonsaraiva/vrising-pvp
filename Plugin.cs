@@ -12,6 +12,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using VRising.PVP.Patches;
 using Wetstone.API;
 using Wetstone.Hooks;
 
@@ -28,17 +29,21 @@ namespace VRising.PVP
         public override void Load()
         {
             Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-            Patch.Load(Log);
+            /*
+             * TODO: this log is absurdly annoying - for some reason it is a property on the `BasePlugin`
+             * class, I can't send a reference to it and I still want to use the same log instance to
+             * write infos/warnings in patches and in command actions..
+             */
+            DeathEventListenerSystemPatch.Load(Log);
             _hooks = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
-            // gotta somehow send the log instance to the command handler
             _commandHandler = new Commands.CommandHandler();
-            Wetstone.Hooks.Chat.OnChatMessage += _commandHandler.HandleChatMessage;
+            Chat.OnChatMessage += _commandHandler.HandleChatMessage;
         }
 
         public override bool Unload()
         {
             _hooks.UnpatchSelf();
-            Wetstone.Hooks.Chat.OnChatMessage -= _commandHandler.HandleChatMessage;
+            Chat.OnChatMessage -= _commandHandler.HandleChatMessage;
             return true;
         }
     }
