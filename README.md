@@ -13,6 +13,7 @@
   - allowed types are `scholar`, `warrior`, `worker`, `creature`, `brute`
   - quality ranges from 1 to 100
 - `.weapons` - adds a kit of t8 weapons
+- `.cd` - resets all your skill & spell cooldowns
 
 ### Respawn in same position
 
