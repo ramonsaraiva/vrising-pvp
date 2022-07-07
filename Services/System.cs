@@ -33,6 +33,7 @@ namespace VRising.PVP.Services
         public static PrefabGUID GetPrefabGUID(Entity entity)
         {
             var entityManager = VWorld.Server.EntityManager;
+            
             try
             {
                 return entityManager.GetComponentData<PrefabGUID>(entity);

@@ -1,4 +1,6 @@
 ﻿using ProjectM;
+using ProjectM.Network;
+using System;
 using Unity.Entities;
 using Wetstone.API;
 using Wetstone.Hooks;
@@ -25,8 +27,8 @@ namespace VRising.PVP.Commands
                 return;
             }
 
-            Domain.Blood.BloodType bloodType = Domain.Blood.GetBloodTypeByName(args[0]);
-            Services.Buffs.SetCharacterBlood(ev.User, bloodType, float.Parse(args[1]), 100);
+            Domain.Blood.DebugBloodType debugBloodType = Domain.Blood.GetDebugBloodTypeByName(args[0]);
+            Services.Buffs.SetCharacterBlood(ev.User, debugBloodType, float.Parse(args[1]), 100);
             ev.User.SendSystemMessage($"Blood set to {args[0]} {args[1]}%");
         }
 

@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace VRising.PVP.Domain
 {
     public class Blood {
-        public enum BloodType
+        public enum DebugBloodType
         {
             Frailed = 0,
             Creature = 1897056612,
@@ -16,6 +16,34 @@ namespace VRising.PVP.Domain
             Worker = -1342764880
         }
 
+        public enum BloodType
+        {
+            Frailed = -899826404,
+            Creature = -77658840,
+            Warrior = -1094467405,
+            Rogue = 793735874,
+            Brute = 581377887,
+            Scholar = -586506765,
+            Worker = -540707191
+        }
+
+        public static DebugBloodType GetDebugBloodTypeByName(string name)
+        {
+            var bloodTypeMap = new Dictionary<string, DebugBloodType>()
+            {
+                {"frailed", DebugBloodType.Frailed},
+                {"creature", DebugBloodType.Creature},
+                {"warrior", DebugBloodType.Warrior},
+                {"rogue", DebugBloodType.Rogue},
+                {"brute", DebugBloodType.Brute},
+                {"scholar", DebugBloodType.Scholar},
+                {"worker", DebugBloodType.Worker},
+            };
+            if (bloodTypeMap.TryGetValue(name, out DebugBloodType bloodType))
+                return bloodType;
+            else
+                return DebugBloodType.Frailed;
+        }
         public static BloodType GetBloodTypeByName(string name)
         {
             var bloodTypeMap = new Dictionary<string, BloodType>()
@@ -32,6 +60,23 @@ namespace VRising.PVP.Domain
                 return bloodType;
             else
                 return BloodType.Frailed;
+        }
+        public static DebugBloodType GetDebugBloodTypeByBloodType(BloodType bloodType)
+        {
+            var bloodTypeMap = new Dictionary<BloodType, DebugBloodType>()
+            {
+                {BloodType.Frailed, DebugBloodType.Frailed},
+                {BloodType.Creature, DebugBloodType.Creature},
+                {BloodType.Warrior, DebugBloodType.Warrior},
+                {BloodType.Rogue, DebugBloodType.Rogue},
+                {BloodType.Brute, DebugBloodType.Brute},
+                {BloodType.Scholar, DebugBloodType.Scholar},
+                {BloodType.Worker, DebugBloodType.Worker},
+            };
+            if (bloodTypeMap.TryGetValue(bloodType, out DebugBloodType debugBloodType))
+                return debugBloodType;
+            else
+                return DebugBloodType.Frailed;
         }
     }
 
