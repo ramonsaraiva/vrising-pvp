@@ -74,5 +74,14 @@ namespace VRising.PVP.Services
                 server.RespawnCharacter(commandBufferSafe, userEntity, customSpawnLocation: spawnLocation, previousCharacter: victimEntity, fadeOutEntity: userEntity);
             }
         }
+
+        public static (PlayerCharacter, Entity, User) RetrieveUserDataFromCharacter(Entity character)
+        {
+            var entityManager = VWorld.Server.EntityManager;
+            var playerCharacter = entityManager.GetComponentData<PlayerCharacter>(character);
+            var userEntity = playerCharacter.UserEntity._Entity;
+            var user = entityManager.GetComponentData<User>(userEntity);
+            return new(playerCharacter, userEntity, user);
+        }
     }
 }

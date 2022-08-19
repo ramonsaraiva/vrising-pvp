@@ -12,7 +12,6 @@ namespace VRising.PVP.Services
     {
         public static void TeleportPlayerToPosition(Entity userEntity, Entity characterEntity, float2 position)
         {
-
             var manager = VWorld.Server.EntityManager;
             var entity = manager.CreateEntity(
                 ComponentType.ReadWrite<FromCharacter>(),

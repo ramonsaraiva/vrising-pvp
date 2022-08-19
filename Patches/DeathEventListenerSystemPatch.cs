@@ -2,12 +2,9 @@
 using HarmonyLib;
 using ProjectM;
 using ProjectM.Network;
-using System;
-using System.Runtime.InteropServices;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
-using Wetstone.API;
+using VRising.PVP.Events;
 
 namespace VRising.PVP.Patches
 {
@@ -44,7 +41,9 @@ namespace VRising.PVP.Patches
             NativeArray<DeathEvent> deathEvents = __instance._DeathEventQuery.ToComponentDataArray<DeathEvent>(Allocator.Temp);
             foreach (DeathEvent ev in deathEvents)
             {
-                if (entityManager.HasComponent<PlayerCharacter>(ev.Died))
+                EventDelegation.KillEventInstance(ev.Killer, ev.Died);
+
+                if (!entityManager.HasComponent<PlayerCharacter>(ev.Died))
                 {
                     continue;
                 }
@@ -64,15 +63,15 @@ namespace VRising.PVP.Patches
                  * TODO: meh - sounds like the character gets spawned after we call this debug event, so the blood doesn't get updated
                  * I guess i'd need to patch whatever system handles the respawn :-(
                  */
+
+                /*
                 var character = user.LocalCharacter._Entity;
                 var bloodComponent = entityManager.GetComponentData<Blood>(character);
                 Domain.Blood.BloodType bloodType = (Domain.Blood.BloodType)bloodComponent.BloodType.GuidHash;
-                Domain.Blood.DebugBloodType debugBloodType = Domain.Blood.GetDebugBloodTypeByBloodType(bloodType);
-                Log.LogInfo($"Setting character's blood to {debugBloodType} {bloodComponent.Quality} 100");
+                Domain.Blood.DebugBloodType debugBloodType = (Domain.Blood.DebugBloodType)bloodType;
                 Services.Buffs.SetCharacterBlood(user, debugBloodType, bloodComponent.Quality, 100);
+                */
             }
         }
     }
-
-
 }

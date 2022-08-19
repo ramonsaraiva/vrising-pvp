@@ -25,6 +25,7 @@ namespace VRising.PVP
     {
         private Harmony _hooks;
         private Commands.CommandHandler _commandHandler;
+        private Events.EventHandler _eventHandler;
 
         public override void Load()
         {
@@ -35,9 +36,12 @@ namespace VRising.PVP
              * write infos/warnings in patches and in command actions..
              */
             DeathEventListenerSystemPatch.Load(Log);
+            CreateDropTableItemsJobPatch.Load(Log);
             _hooks = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
             _commandHandler = new Commands.CommandHandler();
             Chat.OnChatMessage += _commandHandler.HandleChatMessage;
+
+            _eventHandler = new Events.EventHandler(Log);
         }
 
         public override bool Unload()
